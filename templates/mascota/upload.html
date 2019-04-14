@@ -1,81 +1,50 @@
-{# Load the tag library #}
-{% load static %}
+{% extends "mascota/base.html" %}
 
-{% load bootstrap3 %}
-
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Subir Foto de la Mascota</title>
-</head>
-<body>
-	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-	        <span class="sr-only">Toggle navigation</span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-      	  </button>
-	      <a class="navbar-brand" href="#">
-	        PetPhotos
-	      </a>
-	    </div>
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="{% url 'home' %}">Inicio</a></li>
-	        <li class="active"><a href="#">Subir Foto <span class="sr-only">(current)</span></a></li>
-	      </ul>
-	    </div>
-	  </div>
-	</nav>
-	<div class="container">
-		<h2>Sección para subir la foto</h2>
-		<hr>
-		<div class="row">
-			<div class="col-sm-8 col-md-6 col-md-offset-3">
-				<form method="post" enctype="multipart/form-data">
-					{% csrf_token %}
-					<div class="row">
-						<div class="col-sm-6 col-md-4">
-							<div class="form-group">
-								{{ form.nickname.errors }}
-						    <label for="{{ form.nickname.id_for_label }}">Nombre de Usuario:</label>
-						    {{ form.nickname }}
-						  </div>
-						  <div class="form-group">
-						  	{{ form.pet_name.errors }}
-						    <label for="{{ form.pet_name.id_for_label }}">Nombre de la Mascota:</label>
-						    {{ form.pet_name }}
-						  </div>
-						</div>
-						<div class="col-sm-6 col-md-7">
-							<div class="form-group">
-						  	{{ form.photo_pet.errors }}
-						    <label for="{{ form.photo_pet.id_for_label }}">Foto de la Mascota:</label>
-						    {{ form.photo_pet }}
-						  </div>
-						  <img id="prev_photo" class="img-thumbnail img-responsive" alt="">
-						</div>
-						<div class="col-sm-1 col-md-1" style="display: none;" id="controls">
-							<button id="rotate90+" class="btn btn-primary"><-</button>
-							<button id="rotate90-" class="btn btn-primary">-></button>
-							<button id="rotateV" class="btn btn-primary">|</button>
-							<button id="rotateH" class="btn btn-primary">-</button>
-						</div>
+{% block container %}
+	<h2>Sección para subir la foto</h2>
+	<hr>
+	<div class="row">
+		<div class="col-sm-8 col-md-6 col-md-offset-3">
+			<form method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="row">
+					<div class="col-sm-6 col-md-4">
+						<div class="form-group">
+							{{ form.nickname.errors }}
+					    <label for="{{ form.nickname.id_for_label }}">Nombre de Usuario:</label>
+					    {{ form.nickname }}
+					  </div>
+					  <div class="form-group">
+					  	{{ form.pet_name.errors }}
+					    <label for="{{ form.pet_name.id_for_label }}">Nombre de la Mascota:</label>
+					    {{ form.pet_name }}
+					  </div>
 					</div>
-					<button class="btn btn-success" type="submit">Publicar</button>
-				</form>
-			</div>
+					<div class="col-sm-6 col-md-7">
+						<div class="form-group">
+					  	{{ form.photo_pet.errors }}
+					    <label for="{{ form.photo_pet.id_for_label }}">Foto de la Mascota:</label>
+					    {{ form.photo_pet }}
+					  </div>
+					  <img id="prev_photo" class="img-thumbnail img-responsive" alt="">
+					</div>
+					<div class="col-sm-1 col-md-1" style="display: none;" id="controls">
+						<button id="rotate90+" class="btn btn-primary">
+							<i class="fas fa-angle-right"></i>
+						</button>
+						<button id="rotate90-" class="btn btn-primary">
+							<i class="fas fa-angle-left"></i>
+						</button>
+						<button id="rotateV" class="btn btn-primary">
+							<i class="fas fa-angle-down"></i>
+						</button>
+						<button id="rotateH" class="btn btn-primary">
+							<i class="fas fa-angle-up"></i>
+						</button>
+					</div>
+				</div>
+				<button class="btn btn-success" type="submit">Publicar <i class="fas fa-check"></i></button>
+			</form>
 		</div>
 	</div>
-</body>
-</html>
-
-<script src="{% static 'js/talana.js' %}"></script>
+{% endblock %}
