@@ -1,6 +1,17 @@
 from django import forms
+from .models import Usuario
 
-class UploadPhotoForm(forms.Form):
-	nickname = forms.CharField(max_length=50)
-	pet_name = forms.CharField(max_length=100)
-	photo_pet = forms.ImageField()
+class UploadPhotoForm(forms.ModelForm):
+	class Meta:
+		model = Usuario
+		fields = ('nickname', 'pet_name', 'photo_pet')
+		labels = {
+			'nickname': 'Nombre de Usuario',
+			'pet_name': 'Nombre de Mascota',
+			'photo_pet': 'Foto de la Mascota',
+		}
+		widgets = {
+			'nickname': forms.TextInput(attrs={'class': 'form-control'}),
+			'pet_name': forms.TextInput(attrs={'class': 'form-control'}),
+			'photo_pet': forms.FileInput(attrs={'class': 'form-control'}),
+		}
