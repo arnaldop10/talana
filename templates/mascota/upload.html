@@ -1,4 +1,6 @@
 {# Load the tag library #}
+{% load static %}
+
 {% load bootstrap3 %}
 
 {# Load CSS and JavaScript #}
@@ -34,7 +36,46 @@
 	  </div>
 	</nav>
 	<div class="container">
-		<h1>Sección para subir la foto</h1>
+		<h2>Sección para subir la foto</h2>
+		<hr>
+		<div class="row">
+			<div class="col-sm-8 col-md-6 col-md-offset-3">
+				<form method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="row">
+						<div class="col-sm-6 col-md-4">
+							<div class="form-group">
+								{{ form.nickname.errors }}
+						    <label for="{{ form.nickname.id_for_label }}">Nombre de Usuario:</label>
+						    {{ form.nickname }}
+						  </div>
+						  <div class="form-group">
+						  	{{ form.pet_name.errors }}
+						    <label for="{{ form.pet_name.id_for_label }}">Nombre de la Mascota:</label>
+						    {{ form.pet_name }}
+						  </div>
+						</div>
+						<div class="col-sm-6 col-md-7">
+							<div class="form-group">
+						  	{{ form.photo_pet.errors }}
+						    <label for="{{ form.photo_pet.id_for_label }}">Foto de la Mascota:</label>
+						    {{ form.photo_pet }}
+						  </div>
+						  <img id="prev_photo" class="img-thumbnail img-responsive" alt="">
+						</div>
+						<div class="col-sm-1 col-md-1" style="display: none;" id="controls">
+							<button id="rotate90+" class="btn btn-primary"><-</button>
+							<button id="rotate90-" class="btn btn-primary">-></button>
+							<button id="rotateV" class="btn btn-primary">|</button>
+							<button id="rotateH" class="btn btn-primary">-</button>
+						</div>
+					</div>
+					<button class="btn btn-success" type="submit">Publicar</button>
+				</form>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
+
+<script src="{% static 'js/talana.js' %}"></script>

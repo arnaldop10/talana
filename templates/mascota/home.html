@@ -1,4 +1,5 @@
 {# Load the tag library #}
+{% load static %}
 {% load bootstrap3 %}
 
 {# Load CSS and JavaScript #}
@@ -36,7 +37,30 @@
 	<div class="container">
 		<main>
 			<h2>Las Fotos más votadas</h2>
-		</main>		
+		</main>
+		<hr>
+		<div class="row">
+		{% for pet in pets %}
+		  <div class="col-sm-6 col-md-4">
+		    <div class="thumbnail">
+		      <img src="photos/{{ pet.photo_pet }}" alt="Mascota" height="250px">
+		      <div class="caption">
+		        <h4>Nombre de la Mascota: <strong>{{ pet.pet_name }}</strong></h4>
+		        <p>Fecha Publicación: <strong>{{ pet.published | date }}</strong></p>
+		        <p>Votos: <strong>{{ pet.votes }}</strong></p>
+		        <form action="{% url 'home' %}" method="post">
+		        	{% csrf_token %}
+		        	<input type="hidden" name="id" value="{{ pet.photo_id }}">
+		        	<input type="hidden" name="ip" value="">
+		        	<p class="text-center"><button class="btn btn-primary" type="submit">Votar</button></p>
+		        </form>
+		      </div>
+		    </div>
+		  </div>
+		{% endfor %}
+		</div>
 	</div>
 </body>
 </html>
+<script src="{% static 'js/ipGetter.js' %}"></script>
+<script src="{% static 'js/talana.js' %}"></script>
