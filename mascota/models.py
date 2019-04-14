@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-# Create your models here.
+
 class Usuario(models.Model):
 	nickname = models.CharField(max_length=50)
 	pet_name = models.CharField(max_length=100)
@@ -15,4 +15,4 @@ class Usuario(models.Model):
 class Voto(models.Model):
 	ip = models.GenericIPAddressField()
 	date = models.DateTimeField(auto_now_add=True)
-	photo_pet = models.CharField(max_length=255)
+	photo_pet = models.ForeignKey(Usuario, on_delete=models.CASCADE)
