@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import View

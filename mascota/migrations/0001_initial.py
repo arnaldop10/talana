@@ -17,7 +17,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Usuario',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True, primary_key=True,
+                    serialize=False, verbose_name='ID')),
                 ('nickname', models.CharField(max_length=50)),
                 ('pet_name', models.CharField(max_length=100)),
                 ('photo_pet', models.FileField(upload_to='photos/')),
@@ -28,10 +30,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Voto',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True, primary_key=True,
+                    serialize=False, verbose_name='ID')),
                 ('ip', models.GenericIPAddressField()),
                 ('date', models.DateTimeField(auto_now_add=True)),
-                ('photo_pet', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mascota.Usuario')),
+                ('photo_pet', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    to='mascota.Usuario')),
             ],
         ),
     ]
